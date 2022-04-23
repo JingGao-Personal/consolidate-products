@@ -1,10 +1,3 @@
-
-export enum BusinessItems {
-  catalog = 'catalog',
-  supplier = 'supplier',
-  barcodes = 'barcodes'
-}
-
 export type Catalog = {
   sku: string,
   description: string

@@ -1,6 +1,7 @@
 import { readdirSync } from "fs";
-import { BusinessItems, Catalog } from "model";
+import { Catalog } from "model";
 import path from "path";
+import process from "process";
 
 // const test: Catalog= {
 //   sku: 'test',
@@ -9,9 +10,13 @@ import path from "path";
 
 // console.log(test.sku)
 
+const inputFolderPath = process.cwd() + "/src/input";
 
-const inputFolder = path.resolve('input/')
-const files = readdirSync(inputFolder)
-for (const file of files) {
-  console.log(file)
-}
+const execute = async () => {
+  const files = await readdirSync(inputFolderPath);
+  for (const file of files) {
+    console.log(file);
+  }
+};
+
+execute()
