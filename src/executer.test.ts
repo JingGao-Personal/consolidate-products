@@ -1,4 +1,4 @@
-import { fileNameMapGenerator } from "util";
+import { fileNameMapGenerator } from "./util";
 
 
 describe("file names => map", () => {
@@ -12,6 +12,6 @@ describe("file names => map", () => {
       "suppliersB.csv",
     ];
 
-    expect(fileNameMapGenerator(mockData)).toEqual(0)
+    expect(fileNameMapGenerator(mockData)).toEqual(0);
   });
 });

@@ -1,14 +1,14 @@
 import { readdirSync } from "fs";
-import { Catalog } from "model";
+import { Catalog } from "./model";
 import path from "path";
 import process from "process";
 
-// const test: Catalog= {
-//   sku: 'test',
-//   description: 'test'
-// }
+const test: Catalog= {
+  sku: 'test',
+  description: 'test'
+}
 
-// console.log(test.sku)
+console.log(test.sku)
 
 const inputFolderPath = process.cwd() + "/src/input";
 

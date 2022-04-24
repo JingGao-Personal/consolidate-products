@@ -4,7 +4,7 @@
   "description": "This is to merge products from different company and resolve conflicts",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --config ./jest.config.js",
     "start": "ts-node src/executer.ts"
   },
   "repository": {
@@ -19,12 +19,18 @@
   },
   "homepage": "https://github.com/JingGao-Personal/consolidate-products#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.25",
     "jest": "^27.5.1",
+    "jest-junit": "^13.2.0",
+    "ts-jest": "^27.1.4",
     "typescript": "^4.6.3"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/plugin-syntax-flow": "^7.16.7",
+    "babel-preset-flow": "^6.23.0",
     "csv-parse": "^5.0.4"
   }
 }
