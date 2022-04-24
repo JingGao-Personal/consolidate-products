@@ -1,7 +1,6 @@
 import { FileName } from "./model";
 
-const passFileNameIntoObject = (fileName: string) => {
-  let fileNameObject: FileName = { barcodes: "", catalog: "", suppliers: "" };
+const passFileNameIntoObject = (fileName: string, fileNameObject: FileName) => {
   if (fileName.includes("barcodes")) {
     fileNameObject = { ...fileNameObject, barcodes: fileName };
   } else if (fileName.includes("catalog")) {
@@ -18,11 +17,12 @@ export function fileNameMapGenerator(fileNames: string[]) {
 
   for (const fileName of fileNames) {
     let temp = fileName;
-    temp.replace(/barcodes|catalog|suppliers|.csv/gi, "");
-    if (resultMap.has(temp)) {
-      resultMap.set(temp, passFileNameIntoObject(fileName))
+    let filteredTemp = temp.replace(/barcodes|catalog|suppliers|.csv/gi, '');
+    if (resultMap.has(filteredTemp)) {
+      let fileNameObject = resultMap.get(filteredTemp)
+      resultMap.set(filteredTemp, passFileNameIntoObject(fileName, fileNameObject!));
     } else {
-      resultMap.set(temp, passFileNameIntoObject(fileName));
+      resultMap.set(filteredTemp, passFileNameIntoObject(fileName, {barcodes: '', catalog: '', suppliers: ''}));
     }
   }
 

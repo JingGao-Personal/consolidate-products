@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.17.0",
+    "@babel/helper-compilation-targets": "^7.17.7",
     "@babel/plugin-syntax-flow": "^7.16.7",
     "babel-preset-flow": "^6.23.0",
     "csv-parse": "^5.0.4"

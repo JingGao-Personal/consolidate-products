@@ -19,3 +19,9 @@ export type FileName = {
   catalog: string;
   suppliers: string;
 };
+
+export type ResultFile = {
+  sku: string,
+  description: string,
+  source: string
+}
