@@ -1,5 +1,5 @@
-import { FileName } from "./model";
-import { fileNameMapGenerator } from "./util";
+import { Barcode, Catalog, FileName, ResultFile } from "./model";
+import { fileNameMapGenerator, mergeBarcodeAndCatalog } from "./util";
 
 describe("file names => map", () => {
   it("should use company name as key and file names as value to construct a map", () => {
@@ -32,5 +32,28 @@ describe("file names => map", () => {
     ]);
 
     expect(fileNameMapGenerator(mockData)).toEqual(expectData);
+  });
+});
+
+describe("merge barcode and catalog", () => {
+  it("it should return a list of result file objects", () => {
+    const mockBarcode: Barcode[] = [
+      { SKU: "aaa", Barcode: "", SupplierID: 0 },
+      { SKU: "bbb", Barcode: "", SupplierID: 0 },
+    ];
+    const mockCatalog: Catalog[] = [
+      { SKU: "aaa", Description: "this is test" },
+      { SKU: "bbb", Description: "this is test" },
+      { SKU: "ccc", Description: "this is test" },
+    ];
+    const source = "A";
+
+    const expectData: ResultFile[] = [
+      { Source: "A", SKU: "bbb", Description: "this is test", Barcode: "" },
+    ];
+
+    expect(mergeBarcodeAndCatalog(mockBarcode, mockCatalog, source)).toEqual(
+      expectData
+    );
   });
 });

@@ -1,17 +1,23 @@
+export enum FileType {
+  BARCODE,
+  CATALOG,
+  SUPPLIER,
+}
+
 export type Catalog = {
-  sku: string;
-  description: string;
+  SKU: string;
+  Description: string;
 };
 
 export type Supplier = {
-  id: number;
-  name: string;
+  ID: number;
+  Name: string;
 };
 
 export type Barcode = {
-  supplierId: number;
-  sku: string;
-  barcode: string;
+  SupplierID: number;
+  SKU: string;
+  Barcode: string;
 };
 
 export type FileName = {
@@ -21,7 +27,8 @@ export type FileName = {
 };
 
 export type ResultFile = {
-  sku: string,
-  description: string,
-  source: string
-}
+  SKU: string;
+  Description: string;
+  Source: string;
+  Barcode: string;
+};
