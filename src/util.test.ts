@@ -1,5 +1,9 @@
 import { Barcode, Catalog, FileName, ResultFile } from "./model";
-import { fileNameMapGenerator, mergeBarcodeAndCatalog } from "./util";
+import {
+  fileNameMapGenerator,
+  filterOutput,
+  mergeBarcodeAndCatalog,
+} from "./util";
 
 describe("file names => map", () => {
   it("should use company name as key and file names as value to construct a map", () => {
@@ -55,5 +59,25 @@ describe("merge barcode and catalog", () => {
     expect(mergeBarcodeAndCatalog(mockBarcode, mockCatalog, source)).toEqual(
       expectData
     );
+  });
+
+  it("should filter by barcodes first then by sku", () => {
+    const mockData: ResultFile[] = [
+      { SKU: "111", Barcode: "qwer", Source: "A", Description: "Bla Bla" },
+      { SKU: "111", Barcode: "zxcv", Source: "A", Description: "Bla Bla" },
+      { SKU: "222", Barcode: "asdf", Source: "A", Description: "Bla Bla" },
+      { SKU: "222", Barcode: "asdf", Source: "A", Description: "Bla Bla" },
+      { SKU: "111", Barcode: "qwer", Source: "B", Description: "Bla Bla" },
+      { SKU: "222", Barcode: "qwer", Source: "B", Description: "Bla Bla" },
+      { SKU: "333", Barcode: "zxcv", Source: "B", Description: "Bla Bla" },
+      { SKU: "444", Barcode: "zxcv", Source: "B", Description: "Bla Bla" },
+    ];
+
+    const expectData: ResultFile[] = [
+      { SKU: "111", Barcode: "qwer", Source: "A", Description: "Bla Bla" },
+      { SKU: "222", Barcode: "asdf", Source: "A", Description: "Bla Bla" },
+    ];
+
+    expect(filterOutput(mockData)).toEqual(expectData);
   });
 });

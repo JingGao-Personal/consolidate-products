@@ -13,6 +13,11 @@ import { createObjectCsvWriter } from "csv-writer";
 const inputFolderPath = process.cwd() + "/src/input";
 const ouputFolderPath = process.cwd() + "/src/output/result_output.csv";
 
+/* 
+  convert CSV file based on it's type,
+  wrap the return with promise, so that we can get parse csv call back
+  return value
+*/
 const readOneCSVIntoObject = (
   partialPath: string,
   headers: string[],
@@ -74,6 +79,8 @@ const execute = async () => {
     ],
   });
   let data: ResultFile[] = [];
+
+  // Loop the file map, for each entry, pass value as file type
   for (const entry of fileNameMap) {
     const barcodesHeader = ["SupplierID", "SKU", "Barcode"];
     const catalogHeader = ["SKU", "Description"];

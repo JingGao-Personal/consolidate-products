@@ -1,5 +1,6 @@
 import { Barcode, Catalog, FileName, ResultFile } from "./model";
 
+// constract FileName object based on each file name
 const passFileNameIntoObject = (fileName: string, fileNameObject: FileName) => {
   if (fileName.includes("barcodes")) {
     fileNameObject = { ...fileNameObject, barcodes: fileName };
@@ -12,11 +13,14 @@ const passFileNameIntoObject = (fileName: string, fileNameObject: FileName) => {
   return fileNameObject;
 };
 
+// map structure key: company name, value: FileName
 export function fileNameMapGenerator(fileNames: string[]) {
   const resultMap = new Map<string, FileName>();
 
   for (const fileName of fileNames) {
     let temp = fileName;
+
+    // use regex to get company name
     let filteredTemp = temp.replace(/barcodes|catalog|suppliers|.csv/gi, "");
     if (resultMap.has(filteredTemp)) {
       let fileNameObject = resultMap.get(filteredTemp);
@@ -60,17 +64,24 @@ export function mergeBarcodeAndCatalog(
     });
   }
 
+  // Remove the first item
   results.shift();
   return results;
 }
 
 export function filterOutput(data: ResultFile[]) {
+  /* 
+    Because the main company will come last for 
+    filtering so the array needs to be reversed
+  */
   let reverse = data.reverse();
 
+  // Remove duplicate products first
   let filterByBarcodes = [
     ...new Map(reverse.map((item) => [item.Barcode, item])).values(),
   ];
 
+  // Remove duplicated SKUs
   let filteredBySKU = [
     ...new Map(filterByBarcodes.map((item) => [item.SKU, item])).values(),
   ];
